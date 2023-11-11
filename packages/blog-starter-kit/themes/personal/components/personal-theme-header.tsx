@@ -3,6 +3,7 @@ import { resizeImage } from '@starter-kit/utils/image';
 import Link from 'next/link';
 import { PublicationNavbarItem } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
+import LogoLightSVG from './icons/svgs/LogoLightSVG';
 
 function hasUrl(
 	navbarItem: PublicationNavbarItem,
@@ -60,8 +61,14 @@ export const PersonalHeader = () => {
 	);
 
 	return (
-		<header className="grid grid-cols-2 items-center gap-5 ">
-			<div className="col-span-full md:col-span-1">
+		
+		<header className="flex justify-center items-center w-full w-80 gap-5 mb-2 md:py-1 md:mb-8 mt-2">
+			<Link href="/" aria-label={`${publication.author.name}'s blog home page`}>
+        	<LogoLightSVG className="w-44 py-2 md:w-48 fill-void dark:fill-cotton" /> 
+        	</Link>
+		
+			{/* <div className="col-span-full md:col-span-1">
+				
 				<h1>
 					<Link
 						className="flex flex-row items-center gap-2 text-lg font-bold leading-tight tracking-tight text-black dark:text-white"
@@ -85,13 +92,14 @@ export const PersonalHeader = () => {
 			</div>
 			<div className="col-span-full flex flex-row items-center justify-between gap-4 md:col-span-1 md:justify-end">
 				<nav>{navList}</nav>
-				{/* <Button
+				<Button
           label=""
           type="outline"
           className="!p-2"
           icon={<NewsletterPlusSVG className="w-5 h-5 fill-current" />}
-        /> */}
-			</div>
+        />
+			</div> */}
 		</header>
+		
 	);
 };

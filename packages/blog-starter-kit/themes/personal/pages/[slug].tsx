@@ -49,7 +49,7 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 		<li key={tag.id}>
 			<Link
 				href={`/tag/${tag.slug}`}
-				className="block rounded-full border px-2 py-1 font-medium hover:bg-slate-50 dark:border-neutral-800 dark:hover:bg-neutral-800 md:px-4"
+				className="block rounded-full border px-2 py-1 font-medium border border-void shadow-hard-void dark:shadow-hard-cotton hover:bg-slate-50 dark:border-cotton dark:hover:bg-neutral-800 md:px-4"
 			>
 				#{tag.slug}
 			</Link>
@@ -97,7 +97,7 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 				/>
 				<style dangerouslySetInnerHTML={{ __html: highlightJsMonokaiTheme }}></style>
 			</Head>
-			<h1 className="text-4xl leading-tight tracking-tight text-black dark:text-white">
+			<h1 className="text-4xl leading-normal tracking-normal font-black  text-black dark:text-white">
 				{post.title}
 			</h1>
 			<div className="text-neutral-600 dark:text-neutral-400">
@@ -110,7 +110,7 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 			)}
 			<MarkdownToHtml contentMarkdown={post.content.markdown} />
 			{(post.tags ?? []).length > 0 && (
-				<div className="mx-auto w-full text-slate-600 dark:text-neutral-300 md:max-w-screen-md">
+				<div className="mx-auto max-w-2xl  text-void dark:text-cotton md:max-w-screen-md">
 					<ul className="flex flex-row flex-wrap items-center gap-2">{tagsList}</ul>
 				</div>
 			)}
@@ -138,9 +138,9 @@ export default function PostOrPage({ publication, post, page }: Props) {
 	return (
 		<AppProvider publication={publication} post={post}>
 			<Layout>
-				<Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
+				<Container className="mx-auto flex max-w-2xl flex-col items-center gap-3 px-3 py-2">
 					<PersonalHeader />
-					<article className="flex flex-col items-start gap-10 pb-10">
+					<article className="flex flex-col items-start gap-5 pb-10">
 						{post ? Post(publication, post) : Page(page)}
 					</article>
 					<Footer />

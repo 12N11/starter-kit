@@ -62,7 +62,7 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 					<meta
 						name="description"
 						content={
-							publication.descriptionSEO || publication.title || `${publication.author.name}'s Blog`
+							publication.descriptionSEO || publication.title || `${publication.author.name} - A Zenon Network Pillar`
 						}
 					/>
 					<meta property="twitter:card" content="summary_large_image"/>
@@ -83,12 +83,12 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 						}}
 					/>
 				</Head>
-				<Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
+					<Container className="gap-3 md:gap-5 text-center items-center">
 					<PersonalHeader />
 					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
 					{!loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
-						<button className="bg-white" onClick={loadMore}>
-							Load more
+						<button className="shadow-hard-void px-5 rounded-full border border-void my-2 mx-2 text-void font-light dark:border-cotton dark:text-cotton dark:shadow-hard-cotton" onClick={loadMore}>
+							VIEW MORE
 						</button>
 					)}
 					{loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
@@ -97,7 +97,7 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 
 					<Footer />
 				</Container>
-			</Layout>
+				</Layout>
 		</AppProvider>
 	);
 }
