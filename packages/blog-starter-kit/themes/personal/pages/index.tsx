@@ -22,6 +22,8 @@ import {
 	PostsByPublicationQueryVariables,
 	PublicationFragment,
 } from '../generated/graphql';
+import { MinimalBento } from '../components/minimal-bento';
+import { MainSpotlight } from '../components/main-spotlight';
 
 const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 
@@ -83,18 +85,27 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 						}}
 					/>
 				</Head>
-					<Container className="gap-3 md:gap-5 text-center items-center">
-					<PersonalHeader />
-					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
+					<Container className="flex flex-col space-y-6 px-2 md:px-4 min-h-screen">
+					
+					<MainSpotlight />
+					
+					{/* {posts.length > 0 && <MinimalPosts context="home" posts={posts} />} */}
+					<div>
+					<h3 className=" text-4xl text-left px-4 font-semibold tracking-tight">
+					Updates
+					</h3>
+					</div>
+					<div className=" flex-grow ">
+					{posts.length > 0 && <MinimalBento posts={posts} context="home" />}
 					{!loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
-						<button className="shadow-hard-void px-5 rounded-full border border-void my-2 mx-2 text-void font-light dark:border-cotton dark:text-cotton dark:shadow-hard-cotton" onClick={loadMore}>
+						<button className="shadow-hard-neutral-700 px-5 rounded-full border border-void my-2 mx-2 text-neutral-800 font-light dark:border-neutral-50 dark:text-neutral-50 dark:shadow-hard-neutral-50" onClick={loadMore}> 
 							VIEW MORE
 						</button>
 					)}
 					{loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
 						<Waypoint onEnter={loadMore} bottomOffset={'10%'} />
 					)}
-
+					</div>
 					<Footer />
 				</Container>
 				</Layout>

@@ -49,7 +49,7 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 		<li key={tag.id}>
 			<Link
 				href={`/tag/${tag.slug}`}
-				className="block rounded-full border px-2 py-1 font-medium border border-void shadow-hard-void dark:shadow-hard-cotton hover:bg-slate-50 dark:border-cotton dark:hover:bg-neutral-800 md:px-4"
+				className="block rounded-full px-2 py-1 font-medium border shadow-hard-void dark:shadow-hard-cotton hover:bg-slate-50 dark:hover:bg-neutral-800 md:px-4"
 			>
 				#{tag.slug}
 			</Link>
@@ -110,7 +110,7 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 			)}
 			<MarkdownToHtml contentMarkdown={post.content.markdown} />
 			{(post.tags ?? []).length > 0 && (
-				<div className="mx-auto max-w-2xl  text-void dark:text-cotton md:max-w-screen-md">
+				<div className="mx-auto max-w-2xl md:max-w-screen-md">
 					<ul className="flex flex-row flex-wrap items-center gap-2">{tagsList}</ul>
 				</div>
 			)}
@@ -138,9 +138,9 @@ export default function PostOrPage({ publication, post, page }: Props) {
 	return (
 		<AppProvider publication={publication} post={post}>
 			<Layout>
-				<Container className="mx-auto flex max-w-2xl flex-col items-center gap-3 px-3 py-2">
+				<Container className="mx-auto flex max-w-2xl flex-col min-h-screen items-center justify-between gap-3 px-3 py-2">
 					<PersonalHeader />
-					<article className="flex flex-col items-start gap-5 pb-10">
+					<article className="flex flex-col gap-5 pb-10">
 						{post ? Post(publication, post) : Page(page)}
 					</article>
 					<Footer />

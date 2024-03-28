@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { PublicationNavbarItem } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
 import LogoLightSVG from './icons/svgs/LogoLightSVG';
-
+import ModeToggle from './dark-mode-toggle';
 function hasUrl(
 	navbarItem: PublicationNavbarItem,
 ): navbarItem is PublicationNavbarItem & { url: string } {
@@ -62,11 +62,11 @@ export const PersonalHeader = () => {
 
 	return (
 		
-		<header className="flex justify-center items-center w-full w-80 gap-5 mb-2 md:py-1 md:mb-8 mt-2">
+		<header className="flex justify-center items-center w-full gap-5 mb-2 md:py-1 md:mb-8 mt-2">
 			<Link href="/" aria-label={`${publication.author.name}'s blog home page`}>
-        	<LogoLightSVG className="w-44 py-2 md:w-48 fill-void dark:fill-cotton" /> 
+        	<LogoLightSVG className="w-44 py-2 md:w-48 text-gray-800 dark:text-gray-100" /> 
         	</Link>
-		
+			<ModeToggle />
 			{/* <div className="col-span-full md:col-span-1">
 				
 				<h1>

@@ -15,6 +15,17 @@ export type Scalars = {
   Float: { input: number; output: number; }
   DateTime: { input: string; output: string; }
   ObjectId: { input: string; output: string; }
+  URL: { input: any; output: any; }
+};
+
+export type AddCommentInput = {
+  contentMarkdown: Scalars['String']['input'];
+  postId: Scalars['ID']['input'];
+};
+
+export type AddCommentPayload = {
+  __typename?: 'AddCommentPayload';
+  comment?: Maybe<Comment>;
 };
 
 export type AddPostToSeriesInput = {
@@ -28,6 +39,16 @@ export type AddPostToSeriesPayload = {
   __typename?: 'AddPostToSeriesPayload';
   /** The series to which the post was added. */
   series?: Maybe<Series>;
+};
+
+export type AddReplyInput = {
+  commentId: Scalars['ID']['input'];
+  contentMarkdown: Scalars['String']['input'];
+};
+
+export type AddReplyPayload = {
+  __typename?: 'AddReplyPayload';
+  reply?: Maybe<Reply>;
 };
 
 /**
@@ -105,6 +126,17 @@ export type BetaFeature = Node & {
   title?: Maybe<Scalars['String']['output']>;
   /** The url of the beta feature. */
   url?: Maybe<Scalars['String']['output']>;
+};
+
+export type CancelScheduledDraftInput = {
+  /** The Draft ID of the scheduled draft. */
+  draftId: Scalars['ID']['input'];
+};
+
+export type CancelScheduledDraftPayload = {
+  __typename?: 'CancelScheduledDraftPayload';
+  /** Payload returned in response of cancel scheduled post mutation. */
+  scheduledPost: ScheduledPost;
 };
 
 /**
@@ -202,6 +234,510 @@ export type Content = {
   text: Scalars['String']['output'];
 };
 
+/** Two letter ISO 3166-1 alpha-2 country code. */
+export enum CountryCodeAlpha2 {
+  /** Andorra */
+  Ad = 'AD',
+  /** United Arab Emirates */
+  Ae = 'AE',
+  /** Afghanistan */
+  Af = 'AF',
+  /** Antigua and Barbuda */
+  Ag = 'AG',
+  /** Anguilla */
+  Ai = 'AI',
+  /** Albania */
+  Al = 'AL',
+  /** Armenia */
+  Am = 'AM',
+  /** Angola */
+  Ao = 'AO',
+  /** Antarctica */
+  Aq = 'AQ',
+  /** Argentina */
+  Ar = 'AR',
+  /** American Samoa */
+  As = 'AS',
+  /** Austria */
+  At = 'AT',
+  /** Australia */
+  Au = 'AU',
+  /** Aruba */
+  Aw = 'AW',
+  /** Åland Islands */
+  Ax = 'AX',
+  /** Azerbaijan */
+  Az = 'AZ',
+  /** Bosnia and Herzegovina */
+  Ba = 'BA',
+  /** Barbados */
+  Bb = 'BB',
+  /** Bangladesh */
+  Bd = 'BD',
+  /** Belgium */
+  Be = 'BE',
+  /** Burkina Faso */
+  Bf = 'BF',
+  /** Bulgaria */
+  Bg = 'BG',
+  /** Bahrain */
+  Bh = 'BH',
+  /** Burundi */
+  Bi = 'BI',
+  /** Benin */
+  Bj = 'BJ',
+  /** Saint Barthélemy */
+  Bl = 'BL',
+  /** Bermuda */
+  Bm = 'BM',
+  /** Brunei Darussalam */
+  Bn = 'BN',
+  /** Bolivia (Plurinational State of) */
+  Bo = 'BO',
+  /** Bonaire, Sint Eustatius and Saba */
+  Bq = 'BQ',
+  /** Brazil */
+  Br = 'BR',
+  /** Bahamas */
+  Bs = 'BS',
+  /** Bhutan */
+  Bt = 'BT',
+  /** Bouvet Island */
+  Bv = 'BV',
+  /** Botswana */
+  Bw = 'BW',
+  /** Belarus */
+  By = 'BY',
+  /** Belize */
+  Bz = 'BZ',
+  /** Canada */
+  Ca = 'CA',
+  /** Cocos (Keeling) Islands */
+  Cc = 'CC',
+  /** Congo, Democratic Republic of the */
+  Cd = 'CD',
+  /** Central African Republic */
+  Cf = 'CF',
+  /** Congo */
+  Cg = 'CG',
+  /** Switzerland */
+  Ch = 'CH',
+  /** Côte d'Ivoire */
+  Ci = 'CI',
+  /** Cook Islands */
+  Ck = 'CK',
+  /** Chile */
+  Cl = 'CL',
+  /** Cameroon */
+  Cm = 'CM',
+  /** China */
+  Cn = 'CN',
+  /** Colombia */
+  Co = 'CO',
+  /** Costa Rica */
+  Cr = 'CR',
+  /** Cuba */
+  Cu = 'CU',
+  /** Cabo Verde */
+  Cv = 'CV',
+  /** Curaçao */
+  Cw = 'CW',
+  /** Christmas Island */
+  Cx = 'CX',
+  /** Cyprus */
+  Cy = 'CY',
+  /** Czechia */
+  Cz = 'CZ',
+  /** Germany */
+  De = 'DE',
+  /** Djibouti */
+  Dj = 'DJ',
+  /** Denmark */
+  Dk = 'DK',
+  /** Dominica */
+  Dm = 'DM',
+  /** Dominican Republic */
+  Do = 'DO',
+  /** Algeria */
+  Dz = 'DZ',
+  /** Ecuador */
+  Ec = 'EC',
+  /** Estonia */
+  Ee = 'EE',
+  /** Egypt */
+  Eg = 'EG',
+  /** Western Sahara */
+  Eh = 'EH',
+  /** Eritrea */
+  Er = 'ER',
+  /** Spain */
+  Es = 'ES',
+  /** Ethiopia */
+  Et = 'ET',
+  /** Finland */
+  Fi = 'FI',
+  /** Fiji */
+  Fj = 'FJ',
+  /** Falkland Islands (Malvinas) */
+  Fk = 'FK',
+  /** Micronesia (Federated States of) */
+  Fm = 'FM',
+  /** Faroe Islands */
+  Fo = 'FO',
+  /** France */
+  Fr = 'FR',
+  /** Gabon */
+  Ga = 'GA',
+  /** United Kingdom of Great Britain and Northern Ireland */
+  Gb = 'GB',
+  /** Grenada */
+  Gd = 'GD',
+  /** Georgia */
+  Ge = 'GE',
+  /** French Guiana */
+  Gf = 'GF',
+  /** Guernsey */
+  Gg = 'GG',
+  /** Ghana */
+  Gh = 'GH',
+  /** Gibraltar */
+  Gi = 'GI',
+  /** Greenland */
+  Gl = 'GL',
+  /** Gambia */
+  Gm = 'GM',
+  /** Guinea */
+  Gn = 'GN',
+  /** Guadeloupe */
+  Gp = 'GP',
+  /** Equatorial Guinea */
+  Gq = 'GQ',
+  /** Greece */
+  Gr = 'GR',
+  /** South Georgia and the South Sandwich Islands */
+  Gs = 'GS',
+  /** Guatemala */
+  Gt = 'GT',
+  /** Guam */
+  Gu = 'GU',
+  /** Guinea-Bissau */
+  Gw = 'GW',
+  /** Guyana */
+  Gy = 'GY',
+  /** Hong Kong */
+  Hk = 'HK',
+  /** Heard Island and McDonald Islands */
+  Hm = 'HM',
+  /** Honduras */
+  Hn = 'HN',
+  /** Croatia */
+  Hr = 'HR',
+  /** Haiti */
+  Ht = 'HT',
+  /** Hungary */
+  Hu = 'HU',
+  /** Indonesia */
+  Id = 'ID',
+  /** Ireland */
+  Ie = 'IE',
+  /** Israel */
+  Il = 'IL',
+  /** Isle of Man */
+  Im = 'IM',
+  /** India */
+  In = 'IN',
+  /** British Indian Ocean Territory */
+  Io = 'IO',
+  /** Iraq */
+  Iq = 'IQ',
+  /** Iran (Islamic Republic of) */
+  Ir = 'IR',
+  /** Iceland */
+  Is = 'IS',
+  /** Italy */
+  It = 'IT',
+  /** Jersey */
+  Je = 'JE',
+  /** Jamaica */
+  Jm = 'JM',
+  /** Jordan */
+  Jo = 'JO',
+  /** Japan */
+  Jp = 'JP',
+  /** Kenya */
+  Ke = 'KE',
+  /** Kyrgyzstan */
+  Kg = 'KG',
+  /** Cambodia */
+  Kh = 'KH',
+  /** Kiribati */
+  Ki = 'KI',
+  /** Comoros */
+  Km = 'KM',
+  /** Saint Kitts and Nevis */
+  Kn = 'KN',
+  /** Korea (Democratic People's Republic of) */
+  Kp = 'KP',
+  /** Korea, Republic of */
+  Kr = 'KR',
+  /** Kuwait */
+  Kw = 'KW',
+  /** Cayman Islands */
+  Ky = 'KY',
+  /** Kazakhstan */
+  Kz = 'KZ',
+  /** Lao People's Democratic Republic */
+  La = 'LA',
+  /** Lebanon */
+  Lb = 'LB',
+  /** Saint Lucia */
+  Lc = 'LC',
+  /** Liechtenstein */
+  Li = 'LI',
+  /** Sri Lanka */
+  Lk = 'LK',
+  /** Liberia */
+  Lr = 'LR',
+  /** Lesotho */
+  Ls = 'LS',
+  /** Lithuania */
+  Lt = 'LT',
+  /** Luxembourg */
+  Lu = 'LU',
+  /** Latvia */
+  Lv = 'LV',
+  /** Libya */
+  Ly = 'LY',
+  /** Morocco */
+  Ma = 'MA',
+  /** Monaco */
+  Mc = 'MC',
+  /** Moldova, Republic of */
+  Md = 'MD',
+  /** Montenegro */
+  Me = 'ME',
+  /** Saint Martin (French part) */
+  Mf = 'MF',
+  /** Madagascar */
+  Mg = 'MG',
+  /** Marshall Islands */
+  Mh = 'MH',
+  /** North Macedonia */
+  Mk = 'MK',
+  /** Mali */
+  Ml = 'ML',
+  /** Myanmar */
+  Mm = 'MM',
+  /** Mongolia */
+  Mn = 'MN',
+  /** Macao */
+  Mo = 'MO',
+  /** Northern Mariana Islands */
+  Mp = 'MP',
+  /** Martinique */
+  Mq = 'MQ',
+  /** Mauritania */
+  Mr = 'MR',
+  /** Montserrat */
+  Ms = 'MS',
+  /** Malta */
+  Mt = 'MT',
+  /** Mauritius */
+  Mu = 'MU',
+  /** Maldives */
+  Mv = 'MV',
+  /** Malawi */
+  Mw = 'MW',
+  /** Mexico */
+  Mx = 'MX',
+  /** Malaysia */
+  My = 'MY',
+  /** Mozambique */
+  Mz = 'MZ',
+  /** Namibia */
+  Na = 'NA',
+  /** New Caledonia */
+  Nc = 'NC',
+  /** Niger */
+  Ne = 'NE',
+  /** Norfolk Island */
+  Nf = 'NF',
+  /** Nigeria */
+  Ng = 'NG',
+  /** Nicaragua */
+  Ni = 'NI',
+  /** Netherlands */
+  Nl = 'NL',
+  /** Norway */
+  No = 'NO',
+  /** Nepal */
+  Np = 'NP',
+  /** Nauru */
+  Nr = 'NR',
+  /** Niue */
+  Nu = 'NU',
+  /** New Zealand */
+  Nz = 'NZ',
+  /** Oman */
+  Om = 'OM',
+  /** Panama */
+  Pa = 'PA',
+  /** Peru */
+  Pe = 'PE',
+  /** French Polynesia */
+  Pf = 'PF',
+  /** Papua New Guinea */
+  Pg = 'PG',
+  /** Philippines */
+  Ph = 'PH',
+  /** Pakistan */
+  Pk = 'PK',
+  /** Poland */
+  Pl = 'PL',
+  /** Saint Pierre and Miquelon */
+  Pm = 'PM',
+  /** Pitcairn */
+  Pn = 'PN',
+  /** Puerto Rico */
+  Pr = 'PR',
+  /** Palestine, State of */
+  Ps = 'PS',
+  /** Portugal */
+  Pt = 'PT',
+  /** Palau */
+  Pw = 'PW',
+  /** Paraguay */
+  Py = 'PY',
+  /** Qatar */
+  Qa = 'QA',
+  /** Réunion */
+  Re = 'RE',
+  /** Romania */
+  Ro = 'RO',
+  /** Serbia */
+  Rs = 'RS',
+  /** Russian Federation */
+  Ru = 'RU',
+  /** Rwanda */
+  Rw = 'RW',
+  /** Saudi Arabia */
+  Sa = 'SA',
+  /** Solomon Islands */
+  Sb = 'SB',
+  /** Seychelles */
+  Sc = 'SC',
+  /** Sudan */
+  Sd = 'SD',
+  /** Sweden */
+  Se = 'SE',
+  /** Singapore */
+  Sg = 'SG',
+  /** Saint Helena, Ascension and Tristan da Cunha */
+  Sh = 'SH',
+  /** Slovenia */
+  Si = 'SI',
+  /** Svalbard and Jan Mayen */
+  Sj = 'SJ',
+  /** Slovakia */
+  Sk = 'SK',
+  /** Sierra Leone */
+  Sl = 'SL',
+  /** San Marino */
+  Sm = 'SM',
+  /** Senegal */
+  Sn = 'SN',
+  /** Somalia */
+  So = 'SO',
+  /** Suriname */
+  Sr = 'SR',
+  /** South Sudan */
+  Ss = 'SS',
+  /** Sao Tome and Principe */
+  St = 'ST',
+  /** El Salvador */
+  Sv = 'SV',
+  /** Sint Maarten (Dutch part) */
+  Sx = 'SX',
+  /** Syrian Arab Republic */
+  Sy = 'SY',
+  /** Eswatini */
+  Sz = 'SZ',
+  /** Turks and Caicos Islands */
+  Tc = 'TC',
+  /** Chad */
+  Td = 'TD',
+  /** French Southern Territories */
+  Tf = 'TF',
+  /** Togo */
+  Tg = 'TG',
+  /** Thailand */
+  Th = 'TH',
+  /** Tajikistan */
+  Tj = 'TJ',
+  /** Tokelau */
+  Tk = 'TK',
+  /** Timor-Leste */
+  Tl = 'TL',
+  /** Turkmenistan */
+  Tm = 'TM',
+  /** Tunisia */
+  Tn = 'TN',
+  /** Tonga */
+  To = 'TO',
+  /** Turkey */
+  Tr = 'TR',
+  /** Trinidad and Tobago */
+  Tt = 'TT',
+  /** Tuvalu */
+  Tv = 'TV',
+  /** Taiwan, Province of China */
+  Tw = 'TW',
+  /** Tanzania, United Republic of */
+  Tz = 'TZ',
+  /** Ukraine */
+  Ua = 'UA',
+  /** Uganda */
+  Ug = 'UG',
+  /** United States Minor Outlying Islands */
+  Um = 'UM',
+  /** United States of America */
+  Us = 'US',
+  /** Uruguay */
+  Uy = 'UY',
+  /** Uzbekistan */
+  Uz = 'UZ',
+  /** Holy See */
+  Va = 'VA',
+  /** Saint Vincent and the Grenadines */
+  Vc = 'VC',
+  /** Venezuela (Bolivarian Republic of) */
+  Ve = 'VE',
+  /** Virgin Islands (British) */
+  Vg = 'VG',
+  /** Virgin Islands (U.S.) */
+  Vi = 'VI',
+  /** Viet Nam */
+  Vn = 'VN',
+  /** Vanuatu */
+  Vu = 'VU',
+  /** Wallis and Futuna */
+  Wf = 'WF',
+  /** Samoa */
+  Ws = 'WS',
+  /** Yemen */
+  Ye = 'YE',
+  /** Mayotte */
+  Yt = 'YT',
+  /** South Africa */
+  Za = 'ZA',
+  /** Zambia */
+  Zm = 'ZM',
+  /** Zimbabwe */
+  Zw = 'ZW',
+  /** Unknown */
+  Zz = 'ZZ'
+}
+
 /** Contains information about cover image options of the post. Like URL of the cover image, attribution, etc. */
 export type CoverImageOptionsInput = {
   /** Information about the cover image attribution. */
@@ -214,6 +750,93 @@ export type CoverImageOptionsInput = {
   isCoverAttributionHidden?: InputMaybe<Scalars['Boolean']['input']>;
   /** A flag to indicate if the cover image is sticked to bottom. */
   stickCoverToBottom?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CreateDraftInput = {
+  /** Ids of the co-authors of the resulting draft. */
+  coAuthors?: InputMaybe<Array<Scalars['ObjectId']['input']>>;
+  /** Content of the resulting draft in markdown format. */
+  contentMarkdown?: InputMaybe<Scalars['String']['input']>;
+  /** Options for the cover image of the resulting draft. */
+  coverImageOptions?: InputMaybe<CoverImageOptionsInput>;
+  /** A flag to indicate if the comments are disabled for the resulting draft. */
+  disableComments?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Information about the meta tags added to the resulting draft, used for SEO purpose. */
+  metaTags?: InputMaybe<MetaTagsInput>;
+  /** The URL of the original article if the draft is imported from an external source. */
+  originalArticleURL?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of publication the draft and resulting post belongs to. */
+  publicationId: Scalars['ID']['input'];
+  /**
+   * Publish the draft on behalf of another user who is a member of the publication.
+   *
+   * Only applicable for team publications.
+   */
+  publishAs?: InputMaybe<Scalars['ObjectId']['input']>;
+  /** Date when the resulting draft is published. */
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Providing a seriesId will add the resulting draft to that series. */
+  seriesId?: InputMaybe<Scalars['ObjectId']['input']>;
+  /** Settings for the resulting draft like table of contents and newsletter activation. */
+  settings?: InputMaybe<CreateDraftSettingsInput>;
+  /** Slug of the resulting draft. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The subtitle of the resulting draft. */
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  /** A list of tags added to the resulting draft. */
+  tags?: InputMaybe<Array<CreateDraftTagInput>>;
+  /** The title of the resulting draft. */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateDraftPayload = {
+  __typename?: 'CreateDraftPayload';
+  /** The newly created draft */
+  draft?: Maybe<Draft>;
+};
+
+export type CreateDraftSettingsInput = {
+  /** Whether to send a newsletter for the resulting draft's post. */
+  activateNewsletter?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A flag to indicate if the resulting draft should be delisted, used to hide the post created from the draft from public feed. */
+  delist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A flag to indicate if the resulting draft'S post should contain a table of content */
+  enableTableOfContent?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Flag to indicate if the slug is overridden by the user. */
+  slugOverridden?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CreateDraftTagInput = {
+  /**
+   * A tag id that is referencing an existing tag.
+   *
+   * Either this or name and slug should be provided. If both are provided, the id will be used.
+   */
+  id?: InputMaybe<Scalars['ObjectId']['input']>;
+  /**
+   * A name of a new tag to create.
+   *
+   * Either this and slug or id should be provided. If both are provided, the id will be used.
+   */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /**
+   * A slug of a new tag to create.
+   *
+   * Either this and name or id should be provided. If both are provided, the id will be used.
+   */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateWebhookInput = {
+  events: Array<WebhookEvent>;
+  publicationId: Scalars['ID']['input'];
+  secret: Scalars['String']['input'];
+  url: Scalars['String']['input'];
+};
+
+export type CreateWebhookPayload = {
+  __typename?: 'CreateWebhookPayload';
+  webhook?: Maybe<Webhook>;
 };
 
 export type CustomCss = {
@@ -251,6 +874,18 @@ export type DarkModePreferences = {
   logo?: Maybe<Scalars['String']['output']>;
 };
 
+export type DeleteWebhookPayload = {
+  __typename?: 'DeleteWebhookPayload';
+  webhook?: Maybe<Webhook>;
+};
+
+export enum DeviceType {
+  Desktop = 'DESKTOP',
+  Laptop = 'LAPTOP',
+  Mobile = 'MOBILE',
+  Tablet = 'TABLET'
+}
+
 /** Contains the publication's domain information. */
 export type DomainInfo = {
   __typename?: 'DomainInfo';
@@ -284,6 +919,12 @@ export type Draft = Node & {
   /** The author of the draft. */
   author: User;
   canonicalUrl?: Maybe<Scalars['String']['output']>;
+  /**
+   * Returns the user details of the co-authors of the post.
+   * Hashnode users can add up to 4 co-authors as collaborators to their posts.
+   * This functionality is limited to teams publication.
+   */
+  coAuthors?: Maybe<Array<User>>;
   /** Content of the draft in HTML and markdown */
   content?: Maybe<Content>;
   /** The cover image preference of the draft. Contains cover image URL and other details. */
@@ -306,6 +947,8 @@ export type Draft = Node & {
   /** OG meta-data of the draft. Contains image url used in open graph meta tags. */
   ogMetaData?: Maybe<OpenGraphMetaData>;
   readTimeInMinutes: Scalars['Int']['output'];
+  /** The date the draft is scheduled to be published. */
+  scheduledDate?: Maybe<Scalars['DateTime']['output']>;
   /** SEO information of the draft. Contains title and description used in meta tags. */
   seo?: Maybe<Seo>;
   /** Information of the series the draft belongs to. */
@@ -314,8 +957,12 @@ export type Draft = Node & {
   slug: Scalars['String']['output'];
   /** The subtitle of the draft. It would become the subtitle of the post when published. */
   subtitle?: Maybe<Scalars['String']['output']>;
-  /** Returns list of tags added to the draft. Contains tag id, name, slug, etc. */
+  /**
+   * Returns list of tags added to the draft. Contains tag id, name, slug, etc.
+   * @deprecated Use tagsV2 instead. Will be removed on 26/02/2024.
+   */
   tags: Array<Tag>;
+  tagsV2: Array<DraftTag>;
   /** The title of the draft. It would become the title of the post when published. */
   title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
@@ -327,6 +974,18 @@ export type DraftBackup = {
   at?: Maybe<Scalars['DateTime']['output']>;
   /** The status of the backup i.e., success or failure. */
   status?: Maybe<BackupStatus>;
+};
+
+/**
+ * Contains basic information about a Tag within a Draft.
+ * A tag in a draft is a tag that is not published yet.
+ */
+export type DraftBaseTag = {
+  __typename?: 'DraftBaseTag';
+  /** The name of the tag. Shown in tag page. */
+  name: Scalars['String']['output'];
+  /** The slug of the tag. Used to access tags feed.  Example https://hashnode.com/n/graphql */
+  slug: Scalars['String']['output'];
 };
 
 /**
@@ -374,11 +1033,13 @@ export type DraftSettings = {
   __typename?: 'DraftSettings';
   /** A flag to indicate if the comments are disabled for the post. */
   disableComments: Scalars['Boolean']['output'];
-  /** Wether or not the post is hidden from the Hashnode community. */
+  /** Whether or not the post is hidden from the Hashnode community. */
   isDelisted: Scalars['Boolean']['output'];
   /** A flag to indicate if the cover image is shown below title of the post. Default position of cover is top of title. */
   stickCoverToBottom: Scalars['Boolean']['output'];
 };
+
+export type DraftTag = DraftBaseTag | Tag;
 
 /**
  * An edge that contains a node and cursor to the node.
@@ -487,10 +1148,193 @@ export enum FeedType {
   Relevant = 'RELEVANT'
 }
 
+/** Views implementation that will be returned if grouping by browser. */
+export type GroupedByBrowserViews = Node & Views & {
+  __typename?: 'GroupedByBrowserViews';
+  /** The browser that these views belong to. */
+  browser: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by browser. */
+export type GroupedByBrowserVisitors = Node & Visitors & {
+  __typename?: 'GroupedByBrowserVisitors';
+  /** The browser that these views belong to. */
+  browser: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+/** Views implementation that will be returned if grouping by country. */
+export type GroupedByCountryViews = Node & Views & {
+  __typename?: 'GroupedByCountryViews';
+  /** The country that these views belong to. */
+  country: CountryCodeAlpha2;
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by country. */
+export type GroupedByCountryVisitors = Node & Visitors & {
+  __typename?: 'GroupedByCountryVisitors';
+  /** The country that these views belong to. */
+  country: CountryCodeAlpha2;
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+/** Views implementation that will be returned if grouping by device type. */
+export type GroupedByDeviceTypeViews = Node & Views & {
+  __typename?: 'GroupedByDeviceTypeViews';
+  /** The type of device that these views belong to. */
+  deviceType: DeviceType;
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by device type. */
+export type GroupedByDeviceTypeVisitors = Node & Visitors & {
+  __typename?: 'GroupedByDeviceTypeVisitors';
+  /** The type of device that these views belong to. */
+  deviceType: DeviceType;
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+/** Views implementation that will be returned if grouping by operating system. */
+export type GroupedByOperatingSystemViews = Node & Views & {
+  __typename?: 'GroupedByOperatingSystemViews';
+  id: Scalars['ID']['output'];
+  /** The operating system that these views belong to. */
+  operatingSystem: Scalars['String']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by operating system. */
+export type GroupedByOperatingSystemVisitors = Node & Visitors & {
+  __typename?: 'GroupedByOperatingSystemVisitors';
+  id: Scalars['ID']['output'];
+  /** The operating system that these views belong to. */
+  operatingSystem: Scalars['String']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+/** Views implementation that will be returned if grouping by page. */
+export type GroupedByPageViews = Node & Views & {
+  __typename?: 'GroupedByPageViews';
+  id: Scalars['ID']['output'];
+  /** The page that these views belong to. */
+  page: StaticPage;
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by page. */
+export type GroupedByPageVisitors = Node & Visitors & {
+  __typename?: 'GroupedByPageVisitors';
+  id: Scalars['ID']['output'];
+  /** The page that these views belong to. */
+  page: StaticPage;
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+/** Views implementation that will be returned if grouping by path. */
+export type GroupedByPathViews = Node & Views & {
+  __typename?: 'GroupedByPathViews';
+  id: Scalars['ID']['output'];
+  /** The path that these views belong to. */
+  path: Scalars['String']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by path. */
+export type GroupedByPathVisitors = Node & Visitors & {
+  __typename?: 'GroupedByPathVisitors';
+  id: Scalars['ID']['output'];
+  /** The path that these views belong to. */
+  path: Scalars['String']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+/** Views implementation that will be returned if grouping by post. */
+export type GroupedByPostViews = Node & Views & {
+  __typename?: 'GroupedByPostViews';
+  id: Scalars['ID']['output'];
+  /** The post that these views belong to. */
+  post: Post;
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by post. */
+export type GroupedByPostVisitors = Node & Visitors & {
+  __typename?: 'GroupedByPostVisitors';
+  id: Scalars['ID']['output'];
+  /** The post that these views belong to. */
+  post: Post;
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+/** Views implementation that will be returned if grouping by `REFERRER_HOST` dimension. */
+export type GroupedByReferrerHostViews = Node & Views & {
+  __typename?: 'GroupedByReferrerHostViews';
+  id: Scalars['ID']['output'];
+  /** The referrer host that these views belong to. */
+  referrerHost: Scalars['String']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if grouping by `REFERRER_HOST` dimension. */
+export type GroupedByReferrerHostVisitors = Node & Visitors & {
+  __typename?: 'GroupedByReferrerHostVisitors';
+  id: Scalars['ID']['output'];
+  /** The referrer host that these views belong to. */
+  referrerHost: Scalars['String']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
+export type GroupedByTimeViews = Node & Views & {
+  __typename?: 'GroupedByTimeViews';
+  /** The start of the time range that these views belong to. */
+  from: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  /** The end of the time range that these views belong to. */
+  to: Scalars['DateTime']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if a grouping by time is provided. */
+export type GroupedByTimeVisitors = Node & Visitors & {
+  __typename?: 'GroupedByTimeVisitors';
+  /** The start of the time range that these visitors visited the page. */
+  from: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  /** The end of the time range that these visitors visited the page. */
+  to: Scalars['DateTime']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
 export enum HttpRedirectionType {
-  /** A permanent redirect that corresponds to the 308 HTTP status code. */
+  /** A permanent redirect that corresponds to the 302 HTTP status code. */
   Permanent = 'PERMANENT',
-  /** A temporary redirect that corresponds to the 307 HTTP status code. */
+  /** A temporary redirect that corresponds to the 301 HTTP status code. */
   Temporary = 'TEMPORARY'
 }
 
@@ -527,25 +1371,26 @@ export type IUser = {
   badges: Array<Badge>;
   /** The bio of the user. Visible in about me section of the user's profile. */
   bio?: Maybe<Content>;
-  /**
-   * The bio of the user. Visible in about me section of the user's profile.
-   * @deprecated Will be removed on 26/10/2023. Use bio instead of bioV2
-   */
-  bioV2?: Maybe<Content>;
   /** The date the user joined Hashnode. */
   dateJoined?: Maybe<Scalars['DateTime']['output']>;
   /** Whether or not the user is deactivated. */
   deactivated: Scalars['Boolean']['output'];
+  /** The users who are following this user */
+  followers: UserConnection;
   /** The number of users that follow the requested user. Visible in the user's profile. */
   followersCount: Scalars['Int']['output'];
   /** The number of users that this user is following. Visible in the user's profile. */
   followingsCount: Scalars['Int']['output'];
+  /** The users which this user is following */
+  follows: UserConnection;
   /** The ID of the user. It can be used to identify the user. */
   id: Scalars['ID']['output'];
   /** The location of the user. */
   location?: Maybe<Scalars['String']['output']>;
   /** The name of the user. */
   name: Scalars['String']['output'];
+  /** Returns the list of posts the user has published. */
+  posts: UserPostConnection;
   /** The URL to the profile picture of the user. */
   profilePicture?: Maybe<Scalars['String']['output']>;
   /** Publications associated with the user. Includes personal and team publications. */
@@ -562,13 +1407,56 @@ export type IUser = {
 
 
 /** Basic information about a user on Hashnode. */
+export type IUserFollowersArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+};
+
+
+/** Basic information about a user on Hashnode. */
+export type IUserFollowsArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+};
+
+
+/** Basic information about a user on Hashnode. */
+export type IUserPostsArgs = {
+  filter?: InputMaybe<UserPostConnectionFilter>;
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+  sortBy?: InputMaybe<UserPostsSort>;
+};
+
+
+/** Basic information about a user on Hashnode. */
 export type IUserPublicationsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<UserPublicationsConnectionFilter>;
   first: Scalars['Int']['input'];
 };
 
-/** Contains information about meta tags of the post. Used for SEO purpose. */
+export type LikeCommentInput = {
+  commentId: Scalars['ID']['input'];
+  likesCount?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type LikeCommentPayload = {
+  __typename?: 'LikeCommentPayload';
+  comment?: Maybe<Comment>;
+};
+
+export type LikePostInput = {
+  likesCount?: InputMaybe<Scalars['Int']['input']>;
+  postId: Scalars['ID']['input'];
+};
+
+export type LikePostPayload = {
+  __typename?: 'LikePostPayload';
+  post?: Maybe<Post>;
+};
+
+/** Contains information about meta tags. Used for SEO purpose. */
 export type MetaTagsInput = {
   /** The description of the post used in og:description for SEO. */
   description?: InputMaybe<Scalars['String']['input']>;
@@ -580,12 +1468,39 @@ export type MetaTagsInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Adds a comment to a post. */
+  addComment: AddCommentPayload;
   /** Adds a post to a series. */
   addPostToSeries: AddPostToSeriesPayload;
+  /** Adds a reply to a comment. */
+  addReply: AddReplyPayload;
+  cancelScheduledDraft: CancelScheduledDraftPayload;
+  /** Creates a new draft for a post. */
+  createDraft: CreateDraftPayload;
+  createWebhook: CreateWebhookPayload;
+  deleteWebhook: DeleteWebhookPayload;
+  /** Likes a comment. */
+  likeComment: LikeCommentPayload;
+  /** Likes a post. */
+  likePost: LikePostPayload;
+  /** Publishes an existing draft as a post. */
+  publishDraft: PublishDraftPayload;
   /** Creates a new post. */
   publishPost: PublishPostPayload;
-  /** Reschedule a post. */
-  reschedulePost?: Maybe<ScheduledPostPayload>;
+  recommendPublications: RecommendPublicationsPayload;
+  /** Removes a comment from a post. */
+  removeComment: RemoveCommentPayload;
+  /** Removes a post. */
+  removePost: RemovePostPayload;
+  removeRecommendation: RemoveRecommendationPayload;
+  /** Removes a reply from a comment. */
+  removeReply: RemoveReplyPayload;
+  /** Reschedule a draft. */
+  rescheduleDraft: RescheduleDraftPayload;
+  resendWebhookRequest: ResendWebhookRequestPayload;
+  /** Restores a deleted post. */
+  restorePost: RestorePostPayload;
+  scheduleDraft: ScheduleDraftPayload;
   subscribeToNewsletter: SubscribeToNewsletterPayload;
   /**
    * Update the follow state for the user that is provided via id or username.
@@ -594,8 +1509,19 @@ export type Mutation = {
    * Only available to the authenticated user.
    */
   toggleFollowUser: ToggleFollowUserPayload;
+  triggerWebhookTest: TriggerWebhookTestPayload;
   unsubscribeFromNewsletter: UnsubscribeFromNewsletterPayload;
+  /** Updates a comment on a post. */
+  updateComment: UpdateCommentPayload;
   updatePost: UpdatePostPayload;
+  /** Updates a reply */
+  updateReply: UpdateReplyPayload;
+  updateWebhook: UpdateWebhookPayload;
+};
+
+
+export type MutationAddCommentArgs = {
+  input: AddCommentInput;
 };
 
 
@@ -604,13 +1530,93 @@ export type MutationAddPostToSeriesArgs = {
 };
 
 
+export type MutationAddReplyArgs = {
+  input: AddReplyInput;
+};
+
+
+export type MutationCancelScheduledDraftArgs = {
+  input: CancelScheduledDraftInput;
+};
+
+
+export type MutationCreateDraftArgs = {
+  input: CreateDraftInput;
+};
+
+
+export type MutationCreateWebhookArgs = {
+  input: CreateWebhookInput;
+};
+
+
+export type MutationDeleteWebhookArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationLikeCommentArgs = {
+  input: LikeCommentInput;
+};
+
+
+export type MutationLikePostArgs = {
+  input: LikePostInput;
+};
+
+
+export type MutationPublishDraftArgs = {
+  input: PublishDraftInput;
+};
+
+
 export type MutationPublishPostArgs = {
   input: PublishPostInput;
 };
 
 
-export type MutationReschedulePostArgs = {
-  input: ReschedulePostInput;
+export type MutationRecommendPublicationsArgs = {
+  input: RecommendPublicationsInput;
+};
+
+
+export type MutationRemoveCommentArgs = {
+  input: RemoveCommentInput;
+};
+
+
+export type MutationRemovePostArgs = {
+  input: RemovePostInput;
+};
+
+
+export type MutationRemoveRecommendationArgs = {
+  input: RemoveRecommendationInput;
+};
+
+
+export type MutationRemoveReplyArgs = {
+  input: RemoveReplyInput;
+};
+
+
+export type MutationRescheduleDraftArgs = {
+  input: RescheduleDraftInput;
+};
+
+
+export type MutationResendWebhookRequestArgs = {
+  input: ResendWebhookRequestInput;
+};
+
+
+export type MutationRestorePostArgs = {
+  input: RestorePostInput;
+};
+
+
+export type MutationScheduleDraftArgs = {
+  input: ScheduleDraftInput;
 };
 
 
@@ -625,13 +1631,33 @@ export type MutationToggleFollowUserArgs = {
 };
 
 
+export type MutationTriggerWebhookTestArgs = {
+  input: TriggerWebhookTestInput;
+};
+
+
 export type MutationUnsubscribeFromNewsletterArgs = {
   input: UnsubscribeFromNewsletterInput;
 };
 
 
+export type MutationUpdateCommentArgs = {
+  input: UpdateCommentInput;
+};
+
+
 export type MutationUpdatePostArgs = {
   input: UpdatePostInput;
+};
+
+
+export type MutationUpdateReplyArgs = {
+  input: UpdateReplyInput;
+};
+
+
+export type MutationUpdateWebhookArgs = {
+  input: UpdateWebhookInput;
 };
 
 /**
@@ -642,7 +1668,7 @@ export type MyUser = IUser & Node & {
   __typename?: 'MyUser';
   /**
    * Whether or not the user is an ambassador.
-   * @deprecated Ambassadors program no longer active
+   * @deprecated Ambassadors program no longer active. Will be removed after 02/01/2024
    */
   ambassador: Scalars['Boolean']['output'];
   /** The availability of the user based on tech stack and interests. Shown on the "I am available for" section in user's profile. */
@@ -653,27 +1679,26 @@ export type MyUser = IUser & Node & {
   betaFeatures: Array<BetaFeature>;
   /** The bio of the user. Visible in about me section of the user's profile. */
   bio?: Maybe<Content>;
-  /**
-   * The bio of the user. Visible in about me section of the user's profile.
-   * @deprecated Will be removed on 26/10/2023. Use bio instead of bio.V2
-   */
-  bioV2?: Maybe<Content>;
   /** The date the user joined Hashnode. */
   dateJoined?: Maybe<Scalars['DateTime']['output']>;
   /** Whether or not the user is deactivated. */
   deactivated: Scalars['Boolean']['output'];
-  /** Email address of the user. Only available to the authenticated user. */
-  email?: Maybe<Scalars['String']['output']>;
+  /** The users who are following this user */
+  followers: UserConnection;
   /** The number of users that follow the requested user. Visible in the user's profile. */
   followersCount: Scalars['Int']['output'];
   /** The number of users that this user is following. Visible in the user's profile. */
   followingsCount: Scalars['Int']['output'];
+  /** The users which this user is following */
+  follows: UserConnection;
   /** The ID of the user. It can be used to identify the user. */
   id: Scalars['ID']['output'];
   /** The location of the user. */
   location?: Maybe<Scalars['String']['output']>;
   /** The name of the user. */
   name: Scalars['String']['output'];
+  /** Returns the list of posts the user has published. */
+  posts: UserPostConnection;
   /** The URL to the profile picture of the user. */
   profilePicture?: Maybe<Scalars['String']['output']>;
   provider?: Maybe<Scalars['String']['output']>;
@@ -685,10 +1710,40 @@ export type MyUser = IUser & Node & {
   tagline?: Maybe<Scalars['String']['output']>;
   /** Returns a list of tags that the user follows. */
   tagsFollowing: Array<Tag>;
-  /** Hashnode users are subscribed to a newsletter by default. This field can be used to unsubscribe from the newsletter. Only available to the authenticated user. */
-  unsubscribeCode?: Maybe<Scalars['String']['output']>;
   /** The username of the user. It is unique and tied with user's profile URL. Example - https://hashnode.com/@username */
   username: Scalars['String']['output'];
+};
+
+
+/**
+ * Basic information about the authenticated user.
+ * User must be authenticated to use this type.
+ */
+export type MyUserFollowersArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+};
+
+
+/**
+ * Basic information about the authenticated user.
+ * User must be authenticated to use this type.
+ */
+export type MyUserFollowsArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+};
+
+
+/**
+ * Basic information about the authenticated user.
+ * User must be authenticated to use this type.
+ */
+export type MyUserPostsArgs = {
+  filter?: InputMaybe<UserPostConnectionFilter>;
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+  sortBy?: InputMaybe<UserPostsSort>;
 };
 
 
@@ -719,9 +1774,41 @@ export enum NewsletterFrequency {
   Weekly = 'weekly'
 }
 
+export type NewsletterRecord = Node & {
+  __typename?: 'NewsletterRecord';
+  /** The number of subscribers the newsletter was clicked by. */
+  clickCount: Scalars['Int']['output'];
+  /** Delivery ID of the sent newsletter */
+  id: Scalars['ID']['output'];
+  /** The number of subscribers the newsletter was opened by. */
+  openCount: Scalars['Int']['output'];
+  /** Associated post it was sent with */
+  post: Post;
+  /** The date the newsletter was sent. */
+  sentAt: Scalars['DateTime']['output'];
+  /** The number of subscribers the newsletter was sent to. */
+  sentCount: Scalars['Int']['output'];
+};
+
 export enum NewsletterSubscribeStatus {
+  Confirmed = 'CONFIRMED',
   Pending = 'PENDING'
 }
+
+export type NewsletterSubscriber = Node & {
+  __typename?: 'NewsletterSubscriber';
+  /**
+   * The date the subscriber was added.
+   * @deprecated Use `subscribedAt` instead. Will be removed after 12/4/2024
+   */
+  createdAt: Scalars['DateTime']['output'];
+  /** The email of the subscriber. */
+  email: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  /** The status of the subscriber. */
+  status: NewsletterSubscribeStatus;
+  subscribedAt: Scalars['DateTime']['output'];
+};
 
 export enum NewsletterUnsubscribeStatus {
   Unsubscribed = 'UNSUBSCRIBED'
@@ -733,11 +1820,42 @@ export type Node = {
   id: Scalars['ID']['output'];
 };
 
+/** Contains information to help in pagination for page based pagination. */
+export type OffsetPageInfo = {
+  __typename?: 'OffsetPageInfo';
+  /** Indicates if there are more pages. */
+  hasNextPage?: Maybe<Scalars['Boolean']['output']>;
+  /** Indicates if there are previous pages */
+  hasPreviousPage?: Maybe<Scalars['Boolean']['output']>;
+  /**
+   * The page after the current page.
+   * Use it to build page navigation
+   */
+  nextPage?: Maybe<Scalars['Int']['output']>;
+  /**
+   * The page before the current page.
+   * Use it to build page navigation
+   */
+  previousPage?: Maybe<Scalars['Int']['output']>;
+};
+
 /** Information to help in open graph related meta tags. */
 export type OpenGraphMetaData = {
   __typename?: 'OpenGraphMetaData';
   /** The image used in og:image tag for SEO purposes. */
   image?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ * A Connection for page based pagination to get a list of items.
+ * Returns a list of nodes which contains the items.
+ * This is a common interface for all page connections.
+ */
+export type PageConnection = {
+  /** A list of edges of items connection. */
+  nodes: Array<Node>;
+  /** Information to aid in pagination. */
+  pageInfo: OffsetPageInfo;
 };
 
 /** Contains information to help in pagination. */
@@ -804,7 +1922,10 @@ export type PopularTagEdge = Edge & {
  */
 export type Post = Node & {
   __typename?: 'Post';
-  /** Returns male and female audio url of the post. Available in case the Audioblog is enabled. */
+  /**
+   * Returns male and female audio url of the post. Available in case the Audioblog is enabled.
+   * @deprecated Audio Blogs are not supported anymore. This field will be removed 18/04/23
+   */
   audioUrls?: Maybe<AudioUrls>;
   /** Returns the user details of the author of the post. */
   author: User;
@@ -818,6 +1939,12 @@ export type Post = Node & {
   brief: Scalars['String']['output'];
   /** Canonical URL set by author in case of republished posts. */
   canonicalUrl?: Maybe<Scalars['String']['output']>;
+  /**
+   * Returns the user details of the co-authors of the post.
+   * Hashnode users can add up to 4 co-authors as collaborators to their posts.
+   * This functionality is limited to teams publication.
+   */
+  coAuthors?: Maybe<Array<User>>;
   /** List of users who have commented on the post. */
   commenters: PostCommenterConnection;
   /** A list of comments on the post. */
@@ -843,10 +1970,10 @@ export type Post = Node & {
   hasLatexInPost: Scalars['Boolean']['output'];
   /** The ID of the post. Used to uniquely identify the post. */
   id: Scalars['ID']['output'];
-  /** Wether or not the post has automatically been published via RSS feed. */
+  /** Whether or not the post has automatically been published via RSS feed. */
   isAutoPublishedFromRSS: Scalars['Boolean']['output'];
   /**
-   * Wether or not the authenticated user is following this post.
+   * Whether or not the authenticated user is following this post.
    *
    * Returns `null` if the user is not authenticated.
    */
@@ -875,6 +2002,8 @@ export type Post = Node & {
   series?: Maybe<Series>;
   /** The slug of the post. Used as address of the post on blog. Example - https://johndoe.com/my-post-slug */
   slug: Scalars['String']['output'];
+  /** Boolean flag to identify whether or not the post is sourced from GitHub. */
+  sourcedFromGithub: Scalars['Boolean']['output'];
   /** The subtitle of the post. Subtitle is a short description of the post which is also used in SEO if meta tags are not provided. */
   subtitle?: Maybe<Scalars['String']['output']>;
   /** Returns list of tags added to the post. Contains tag id, name, slug, etc. */
@@ -922,6 +2051,14 @@ export type PostLikedByArgs = {
   first: Scalars['Int']['input'];
 };
 
+/** The author type of a post from a user's perspective */
+export enum PostAuthorType {
+  /** The user has authored the post. */
+  Author = 'AUTHOR',
+  /** The user is a co-author of post. */
+  CoAuthor = 'CO_AUTHOR'
+}
+
 export type PostBadge = Node & {
   __typename?: 'PostBadge';
   /** Unique identifier. */
@@ -937,7 +2074,7 @@ export enum PostBadgeType {
 
 export type PostBadgesFeature = Feature & {
   __typename?: 'PostBadgesFeature';
-  /** Wether or not the user has chosen to show badges on the post. */
+  /** Whether or not the user has chosen to show badges on the post. */
   isEnabled: Scalars['Boolean']['output'];
   items: Array<PostBadge>;
 };
@@ -1075,7 +2212,7 @@ export type PostPreferences = {
   __typename?: 'PostPreferences';
   /** A flag to indicate if the comments are disabled for the post. */
   disableComments: Scalars['Boolean']['output'];
-  /** Wether or not the post is hidden from the Hashnode community. */
+  /** Whether or not the post is hidden from the Hashnode community. */
   isDelisted: Scalars['Boolean']['output'];
   /** A flag to indicate if the post is pinned to blog. Pinned post is shown on top of the blog. */
   pinnedToBlog: Scalars['Boolean']['output'];
@@ -1110,11 +2247,13 @@ export type Publication = Node & {
   __typename?: 'Publication';
   /** The about section of the publication. */
   about?: Maybe<Content>;
+  /** Boolean flag indicating if the publication allows edits by contributors */
+  allowContributorEdits: Scalars['Boolean']['output'];
   /** The author who owns the publication. */
   author: User;
   /** The canonical URL of the publication. */
   canonicalURL: Scalars['String']['output'];
-  /** The description of the publication, used in og:description meta tag. */
+  /** The description of the publication, used in og:description meta tag. Fall backs to Publication.about.text if no SEO description is provided. */
   descriptionSEO?: Maybe<Scalars['String']['output']>;
   /** The title of the publication. Shown in blog home page. */
   displayTitle?: Maybe<Scalars['String']['output']>;
@@ -1136,8 +2275,13 @@ export type Publication = Node & {
   headerColor?: Maybe<Scalars['String']['output']>;
   /** The ID of the publication. */
   id: Scalars['ID']['output'];
-  /** Summary of the contact information and information related to copyrights, usually used in German-speaking countries. */
+  /**
+   * Summary of the contact information and information related to copyrights, usually used in German-speaking countries.
+   * @deprecated Use `imprintV2` instead. Will be removed after 16/12/2023.
+   */
   imprint?: Maybe<Scalars['String']['output']>;
+  /** Summary of the contact information and information related to copyrights, usually used in German-speaking countries. */
+  imprintV2?: Maybe<Content>;
   /** The integrations connected to the publication. */
   integrations?: Maybe<PublicationIntegrations>;
   /** Returns true if GitHub backup is configured and active and false otherwise. */
@@ -1160,6 +2304,10 @@ export type Publication = Node & {
   posts: PublicationPostConnection;
   /** The publication preferences around layout, theme and other personalisations. */
   preferences: Preferences;
+  /** Publications that are recommended by this publication. */
+  recommendedPublications: Array<UserRecommendedPublicationEdge>;
+  /** Publications that are recommending this publication. */
+  recommendingPublications: PublicationUserRecommendingPublicationConnection;
   /** Configured redirection rules for the publication. */
   redirectionRules: Array<RedirectionRule>;
   /** Returns the scheduled drafts of the publication. */
@@ -1181,6 +2329,8 @@ export type Publication = Node & {
    * Title is used as logo if logo is not provided.
    */
   title: Scalars['String']['output'];
+  /** The total amount of recommended publications by this publication. */
+  totalRecommendedPublications: Scalars['Int']['output'];
   /** The domain of the publication. Used to access publication. Example https://johndoe.com */
   url: Scalars['String']['output'];
   /** Determines the structure of the post URLs. */
@@ -1216,6 +2366,16 @@ export type PublicationPostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<PublicationPostConnectionFilter>;
   first: Scalars['Int']['input'];
+};
+
+
+/**
+ * Contains basic information about the publication.
+ * A publication is a blog that can be created for a user or a team.
+ */
+export type PublicationRecommendingPublicationsArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
 };
 
 
@@ -1290,7 +2450,10 @@ export type PublicationDraftConnectionFilter = {
 /** Contains the publication's beta features. */
 export type PublicationFeatures = {
   __typename?: 'PublicationFeatures';
-  /** Audio player for blog posts. */
+  /**
+   * Audio player for blog posts.
+   * @deprecated Audio Blogs are not supported anymore. This field will be removed 18/04/23
+   */
   audioBlog: AudioBlogFeature;
   /** Individual styling for the publication. */
   customCSS: CustomCssFeature;
@@ -1318,6 +2481,8 @@ export type PublicationIntegrations = {
   fathomSiteID?: Maybe<Scalars['String']['output']>;
   /** FB Pixel ID for integration with Facebook Pixel. */
   fbPixelID?: Maybe<Scalars['String']['output']>;
+  /** Google Tag Manager ID for integration with Google Tag Manager. */
+  gTagManagerID?: Maybe<Scalars['String']['output']>;
   /** Google Analytics Tracking ID for integration with Google Analytics. */
   gaTrackingID?: Maybe<Scalars['String']['output']>;
   /** Hotjar Site ID for integration with Hotjar. */
@@ -1328,6 +2493,8 @@ export type PublicationIntegrations = {
   matomoURL?: Maybe<Scalars['String']['output']>;
   /** A flag indicating if the custom domain is enabled for integration with Plausible Analytics. */
   plausibleAnalyticsEnabled?: Maybe<Scalars['Boolean']['output']>;
+  /** The share ID for the Hashnode-provided Umami analytics instance. */
+  umamiShareId?: Maybe<Scalars['String']['output']>;
   /** The ID for the Hashnode-provided Umami analytics instance. */
   umamiWebsiteUUID?: Maybe<Scalars['String']['output']>;
   /** Web Monetization Payment Pointer for integration with Web Monetization. */
@@ -1370,6 +2537,17 @@ export type PublicationLinks = {
   youtube?: Maybe<Scalars['String']['output']>;
 };
 
+/** Contains the publication member information. */
+export type PublicationMember = Node & {
+  __typename?: 'PublicationMember';
+  /** The ID of the publication member. */
+  id: Scalars['ID']['output'];
+  /** The role of the user in the publication. */
+  role: UserPublicationRole;
+  /** The user who is a member of the publication. */
+  user?: Maybe<User>;
+};
+
 /** Contains the publication's navbar items. */
 export type PublicationNavbarItem = {
   __typename?: 'PublicationNavbarItem';
@@ -1379,7 +2557,10 @@ export type PublicationNavbarItem = {
   label?: Maybe<Scalars['String']['output']>;
   /** The static page added to the navbar item. */
   page?: Maybe<StaticPage>;
-  /** The order of the navbar item. */
+  /**
+   * The order of the navbar item.
+   * @deprecated Navbar items are already returned in the correct order. Priority value is not needed and might be 0 in most cases.
+   */
   priority?: Maybe<Scalars['Int']['output']>;
   /** The series added to the navbar item. */
   series?: Maybe<Series>;
@@ -1419,6 +2600,8 @@ export type PublicationPostConnection = Connection & {
  * Returns a list of edges which contains the posts in publication and cursor to the last item of the previous page.
  */
 export type PublicationPostConnectionFilter = {
+  /** Only return posts that are deleted. Query returns active posts by default, set this to true to return deleted posts. */
+  deletedOnly?: InputMaybe<Scalars['Boolean']['input']>;
   /** Remove pinned post from the result set. */
   excludePinnedPost?: InputMaybe<Scalars['Boolean']['input']>;
   /**
@@ -1450,6 +2633,41 @@ export type PublicationSponsorship = {
   stripe?: Maybe<StripeConfiguration>;
 };
 
+export type PublicationUserRecommendingPublicationConnection = PageConnection & {
+  __typename?: 'PublicationUserRecommendingPublicationConnection';
+  /** A list of edges containing Post information */
+  edges: Array<UserRecommendingPublicationEdge>;
+  /** Publications recommending this publication. */
+  nodes: Array<Publication>;
+  /** Information for page based pagination in Post connection. */
+  pageInfo: OffsetPageInfo;
+  /** The total number of documents in the connection. */
+  totalDocuments: Scalars['Int']['output'];
+};
+
+export type PublicationViewEdge = Edge & {
+  __typename?: 'PublicationViewEdge';
+  cursor: Scalars['String']['output'];
+  node: Views;
+};
+
+export type PublicationVisitorsEdge = Edge & {
+  __typename?: 'PublicationVisitorsEdge';
+  cursor: Scalars['String']['output'];
+  node: Visitors;
+};
+
+export type PublishDraftInput = {
+  /** The id of the draft that should be published */
+  draftId: Scalars['ObjectId']['input'];
+};
+
+export type PublishDraftPayload = {
+  __typename?: 'PublishDraftPayload';
+  /** The newly created post based on the draft */
+  post?: Maybe<Post>;
+};
+
 /** Contains information about the post to be published. */
 export type PublishPostInput = {
   /** Ids of the co-authors of the post. */
@@ -1460,8 +2678,6 @@ export type PublishPostInput = {
   coverImageOptions?: InputMaybe<CoverImageOptionsInput>;
   /** A flag to indicate if the comments are disabled for the post. */
   disableComments?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The ID of the draft to be published. */
-  draftId: Scalars['ObjectId']['input'];
   /** Information about the meta tags added to the post, used for SEO purpose. */
   metaTags?: InputMaybe<MetaTagsInput>;
   /** The URL of the original article if the post is imported from an external source. */
@@ -1484,8 +2700,11 @@ export type PublishPostInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
   /** The subtitle of the post. */
   subtitle?: InputMaybe<Scalars['String']['input']>;
-  /** A list of tags added to the post. */
-  tags: Array<PublishPostTagInput>;
+  /**
+   * A list of tags to add to the post. You can get a list of popular tags available on Hashnode here.
+   * https://github.com/Hashnode/support/blob/main/misc/tags.json
+   */
+  tags?: InputMaybe<Array<PublishPostTagInput>>;
   /** The title of the post. */
   title: Scalars['String']['input'];
 };
@@ -1500,7 +2719,7 @@ export type PublishPostSettingsInput = {
   delisted?: InputMaybe<Scalars['Boolean']['input']>;
   /** A flag to indicate if the post contains table of content */
   enableTableOfContent?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Wether to send a newsletter for this post. */
+  /** Whether to send a newsletter for this post. */
   isNewsletterActivated?: InputMaybe<Scalars['Boolean']['input']>;
   /** A flag to indicate if the post is scheduled. */
   scheduled?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1543,6 +2762,8 @@ export type Query = {
   feed: FeedPostConnection;
   /** Returns the current authenticated user. Only available to the authenticated user. */
   me: MyUser;
+  /** Returns post by ID. Can be used to render post page on blog. */
+  post?: Maybe<Post>;
   /**
    * Returns the publication with the given ID or host.
    * User can pass anyone of them.
@@ -1570,6 +2791,11 @@ export type QueryFeedArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<FeedFilter>;
   first: Scalars['Int']['input'];
+};
+
+
+export type QueryPostArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -1624,6 +2850,16 @@ export type ReadTimeFeature = Feature & {
   isEnabled: Scalars['Boolean']['output'];
 };
 
+export type RecommendPublicationsInput = {
+  recommendedPublicationIds: Array<Scalars['ID']['input']>;
+  recommendingPublicationId: Scalars['ID']['input'];
+};
+
+export type RecommendPublicationsPayload = {
+  __typename?: 'RecommendPublicationsPayload';
+  recommendedPublications?: Maybe<Array<UserRecommendedPublicationEdge>>;
+};
+
 /** Contains a publication and a cursor for pagination. */
 export type RecommendedPublicationEdge = Edge & {
   __typename?: 'RecommendedPublicationEdge';
@@ -1633,14 +2869,55 @@ export type RecommendedPublicationEdge = Edge & {
   node: Publication;
 };
 
-export type RedirectionRule = {
+export type RedirectionRule = Node & {
   __typename?: 'RedirectionRule';
   /** The destination URL of the redirection rule. */
-  destination: Scalars['String']['output'];
+  destination: Scalars['URL']['output'];
+  id: Scalars['ID']['output'];
   /** The source URL of the redirection rule. */
   source: Scalars['String']['output'];
   /** The type of the redirection rule. */
   type: HttpRedirectionType;
+};
+
+export type RemoveCommentInput = {
+  id: Scalars['ID']['input'];
+};
+
+export type RemoveCommentPayload = {
+  __typename?: 'RemoveCommentPayload';
+  comment?: Maybe<Comment>;
+};
+
+export type RemovePostInput = {
+  /** The ID of the post to remove. */
+  id: Scalars['ID']['input'];
+};
+
+export type RemovePostPayload = {
+  __typename?: 'RemovePostPayload';
+  /** The deleted post. */
+  post?: Maybe<Post>;
+};
+
+export type RemoveRecommendationInput = {
+  recommendedPublicationId: Scalars['ID']['input'];
+  recommendingPublicationId: Scalars['ID']['input'];
+};
+
+export type RemoveRecommendationPayload = {
+  __typename?: 'RemoveRecommendationPayload';
+  recommendedPublication: Publication;
+};
+
+export type RemoveReplyInput = {
+  commentId: Scalars['ID']['input'];
+  replyId: Scalars['ID']['input'];
+};
+
+export type RemoveReplyPayload = {
+  __typename?: 'RemoveReplyPayload';
+  reply?: Maybe<Reply>;
 };
 
 /**
@@ -1668,11 +2945,36 @@ export type Reply = Node & {
   totalReactions: Scalars['Int']['output'];
 };
 
-export type ReschedulePostInput = {
-  /** The Draft ID of the scheduled post. */
-  draftId: Scalars['ObjectId']['input'];
-  /** New scheduled date for the post to be rescheduled. */
-  scheduledDate: Scalars['DateTime']['input'];
+export type RescheduleDraftInput = {
+  /** The Draft ID of the scheduled draft. */
+  draftId: Scalars['ID']['input'];
+  /** New scheduled date for the draft to be rescheduled. */
+  publishAt: Scalars['DateTime']['input'];
+};
+
+export type RescheduleDraftPayload = {
+  __typename?: 'RescheduleDraftPayload';
+  /** Payload returned in response of reschedulePost mutation. */
+  scheduledPost: ScheduledPost;
+};
+
+export type ResendWebhookRequestInput = {
+  webhookId: Scalars['ID']['input'];
+  webhookMessageId: Scalars['ID']['input'];
+};
+
+export type ResendWebhookRequestPayload = {
+  __typename?: 'ResendWebhookRequestPayload';
+  webhookMessage?: Maybe<WebhookMessage>;
+};
+
+export type RestorePostInput = {
+  id: Scalars['ID']['input'];
+};
+
+export type RestorePostPayload = {
+  __typename?: 'RestorePostPayload';
+  post?: Maybe<Post>;
 };
 
 /** Information to help in seo related meta tags. */
@@ -1682,6 +2984,21 @@ export type Seo = {
   description?: Maybe<Scalars['String']['output']>;
   /** The title used in og:title tag for SEO purposes. */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ScheduleDraftInput = {
+  /** The Author ID of the draft that should be published */
+  authorId: Scalars['ID']['input'];
+  /** The id of the draft that should be published */
+  draftId: Scalars['ID']['input'];
+  /** The date the draft should be published */
+  publishAt: Scalars['DateTime']['input'];
+};
+
+export type ScheduleDraftPayload = {
+  __typename?: 'ScheduleDraftPayload';
+  /** Payload returned in response of reschedulePost mutation. */
+  scheduledPost: ScheduledPost;
 };
 
 /**
@@ -1704,12 +3021,6 @@ export type ScheduledPost = Node & {
   scheduledDate: Scalars['DateTime']['output'];
 };
 
-export type ScheduledPostPayload = {
-  __typename?: 'ScheduledPostPayload';
-  /** Payload returned in response of reschedulePost mutation. */
-  payload: ScheduledPost;
-};
-
 /** Enum of all the scopes that can be used with the @requireAuth directive. */
 export enum Scope {
   AcknowledgeEmailImport = 'acknowledge_email_import',
@@ -1719,13 +3030,26 @@ export enum Scope {
   CreatePro = 'create_pro',
   ImportSubscribersToPublication = 'import_subscribers_to_publication',
   PublicationAdmin = 'publication_admin',
+  PublicationMember = 'publication_member',
+  PublishComment = 'publish_comment',
   PublishDraft = 'publish_draft',
+  PublishPost = 'publish_post',
+  PublishReply = 'publish_reply',
   RecommendPublications = 'recommend_publications',
+  RemoveComment = 'remove_comment',
+  RemoveReply = 'remove_reply',
+  RestorePost = 'restore_post',
   Signup = 'signup',
+  TeamHashnode = 'team_hashnode',
+  UpdateComment = 'update_comment',
   UpdatePost = 'update_post',
+  UpdateReply = 'update_reply',
   WebhookAdmin = 'webhook_admin',
+  WriteDraft = 'write_draft',
   WritePost = 'write_post',
-  WriteSeries = 'write_series'
+  WriteSeries = 'write_series',
+  WriteStaticPage = 'write_static_page',
+  WriteWidget = 'write_widget'
 }
 
 /**
@@ -1742,6 +3066,8 @@ export type SearchPostConnection = Connection & {
 };
 
 export type SearchPostsOfPublicationFilter = {
+  /** Only return posts that are deleted. Query returns active posts by default, set this to true to return deleted posts. */
+  deletedOnly?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of publications to search from. */
   publicationId: Scalars['ObjectId']['input'];
   /** The query to be searched in post. */
@@ -1922,7 +3248,7 @@ export type SubscribeToNewsletterPayload = {
 
 export type TableOfContentsFeature = Feature & {
   __typename?: 'TableOfContentsFeature';
-  /** Wether or not ser has chosen to show a table of contents on the post. */
+  /** Whether or not the user has chosen to show a table of contents on the post. */
   isEnabled: Scalars['Boolean']['output'];
   /** The content of the table of contents. */
   items: Array<TableOfContentsItem>;
@@ -2013,6 +3339,31 @@ export type ToggleFollowUserPayload = {
   user?: Maybe<User>;
 };
 
+export type TriggerWebhookTestInput = {
+  webhookId: Scalars['ID']['input'];
+};
+
+export type TriggerWebhookTestPayload = {
+  __typename?: 'TriggerWebhookTestPayload';
+  webhook?: Maybe<Webhook>;
+};
+
+/** Views implementation that will be returned if no grouping is applied. */
+export type UngroupedViews = Node & Views & {
+  __typename?: 'UngroupedViews';
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+/** Visitors implementation that will be returned if no grouping is applied. */
+export type UngroupedVisitors = Node & Visitors & {
+  __typename?: 'UngroupedVisitors';
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
+
 export type UnsubscribeFromNewsletterInput = {
   /** The email that is currently subscribed. */
   email: Scalars['String']['input'];
@@ -2023,6 +3374,16 @@ export type UnsubscribeFromNewsletterInput = {
 export type UnsubscribeFromNewsletterPayload = {
   __typename?: 'UnsubscribeFromNewsletterPayload';
   status?: Maybe<NewsletterUnsubscribeStatus>;
+};
+
+export type UpdateCommentInput = {
+  contentMarkdown: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
+};
+
+export type UpdateCommentPayload = {
+  __typename?: 'UpdateCommentPayload';
+  comment?: Maybe<Comment>;
 };
 
 export type UpdatePostInput = {
@@ -2083,6 +3444,29 @@ export type UpdatePostSettingsInput = {
   pinToBlog?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type UpdateReplyInput = {
+  commentId: Scalars['ID']['input'];
+  contentMarkdown: Scalars['String']['input'];
+  replyId: Scalars['ID']['input'];
+};
+
+export type UpdateReplyPayload = {
+  __typename?: 'UpdateReplyPayload';
+  reply?: Maybe<Reply>;
+};
+
+export type UpdateWebhookInput = {
+  events?: InputMaybe<Array<WebhookEvent>>;
+  id: Scalars['ID']['input'];
+  secret?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateWebhookPayload = {
+  __typename?: 'UpdateWebhookPayload';
+  webhook?: Maybe<Webhook>;
+};
+
 export enum UrlPattern {
   /** Post URLs contain the slug (for example `my slug`) and a random id (like `1234`) , e.g. "/my-slug-1234". */
   Default = 'DEFAULT',
@@ -2095,7 +3479,7 @@ export type User = IUser & Node & {
   __typename?: 'User';
   /**
    * Whether or not the user is an ambassador.
-   * @deprecated Ambassadors program no longer active
+   * @deprecated Ambassadors program no longer active. Will be removed after 02/01/2024
    */
   ambassador: Scalars['Boolean']['output'];
   /** The availability of the user based on tech stack and interests. Shown on the "I am available for" section in user's profile. */
@@ -2113,28 +3497,34 @@ export type User = IUser & Node & {
   dateJoined?: Maybe<Scalars['DateTime']['output']>;
   /** Whether or not the user is deactivated. */
   deactivated: Scalars['Boolean']['output'];
+  /** The users who are following this user */
+  followers: UserConnection;
   /** The number of users that follow the requested user. Visible in the user's profile. */
   followersCount: Scalars['Int']['output'];
   /**
-   * Wether or not the authenticated user follows this user.
+   * Whether or not the authenticated user follows this user.
    * Returns false if the authenticated user this user.
    */
   following: Scalars['Boolean']['output'];
   /** The number of users that this user is following. Visible in the user's profile. */
   followingsCount: Scalars['Int']['output'];
+  /** The users which this user is following */
+  follows: UserConnection;
   /**
-   * Wether or not this user follows the authenticated user.
+   * Whether or not this user follows the authenticated user.
    * Returns false if the authenticated user this user.
    */
   followsBack: Scalars['Boolean']['output'];
   /** The ID of the user. It can be used to identify the user. */
   id: Scalars['ID']['output'];
-  /** Wether or not this is a pro user. */
+  /** Whether or not this is a pro user. */
   isPro: Scalars['Boolean']['output'];
   /** The location of the user. */
   location?: Maybe<Scalars['String']['output']>;
   /** The name of the user. */
   name: Scalars['String']['output'];
+  /** Returns the list of posts the user has published. */
+  posts: UserPostConnection;
   /** The URL to the profile picture of the user. */
   profilePicture?: Maybe<Scalars['String']['output']>;
   /** Publications associated with the user. Includes personal and team publications. */
@@ -2151,10 +3541,48 @@ export type User = IUser & Node & {
 
 
 /** Basic information about a user on Hashnode. */
+export type UserFollowersArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+};
+
+
+/** Basic information about a user on Hashnode. */
+export type UserFollowsArgs = {
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+};
+
+
+/** Basic information about a user on Hashnode. */
+export type UserPostsArgs = {
+  filter?: InputMaybe<UserPostConnectionFilter>;
+  page: Scalars['Int']['input'];
+  pageSize: Scalars['Int']['input'];
+  sortBy?: InputMaybe<UserPostsSort>;
+};
+
+
+/** Basic information about a user on Hashnode. */
 export type UserPublicationsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<UserPublicationsConnectionFilter>;
   first: Scalars['Int']['input'];
+};
+
+/**
+ * Connection for users to another user. Contains a list of nodes.
+ * Each node is a user.
+ * Page info contains information about pagination like hasNextPage and endCursor.
+ */
+export type UserConnection = PageConnection & {
+  __typename?: 'UserConnection';
+  /** A list of users */
+  nodes: Array<User>;
+  /** Information for page based pagination in users connection. */
+  pageInfo: OffsetPageInfo;
+  /** The total number of documents in the connection. */
+  totalDocuments: Scalars['Int']['output'];
 };
 
 /** Contains a node of type user and cursor for pagination. */
@@ -2165,6 +3593,69 @@ export type UserEdge = Edge & {
   /** The node containing User information */
   node: User;
 };
+
+/**
+ * Connection for posts written by a single user. Contains a list of edges containing nodes.
+ * Each node is a post.
+ * Page info contains information about pagination like hasNextPage and endCursor.
+ */
+export type UserPostConnection = PageConnection & {
+  __typename?: 'UserPostConnection';
+  /** A list of edges containing Post information */
+  edges: Array<UserPostEdge>;
+  /** A list of posts */
+  nodes: Array<Post>;
+  /** Information for page based pagination in Post connection. */
+  pageInfo: OffsetPageInfo;
+  /** The total number of documents in the connection. */
+  totalDocuments: Scalars['Int']['output'];
+};
+
+/** Filter for the posts of a user. */
+export type UserPostConnectionFilter = {
+  /** Filtering by author status. Either all posts the user has authored or co-authored are returned or the authored posts only. */
+  authorType?: InputMaybe<UserPostsAuthorTypeFilter>;
+  /** Filtering by publication IDs will return posts from the author within the publication. */
+  publications?: InputMaybe<Array<Scalars['ID']['input']>>;
+  /**
+   * Only include posts that reference the provided tag slugs.
+   *
+   * Filtering by `tags` and `tagSlugs` will filter posts that match either of those two filters.
+   */
+  tagSlugs?: InputMaybe<Array<Scalars['String']['input']>>;
+  /**
+   * Only include posts that reference the provided tag IDs.
+   *
+   *
+   * Filtering by `tags` and `tagSlugs` will filter posts that match either of those two filters.
+   */
+  tags?: InputMaybe<Array<Scalars['ID']['input']>>;
+};
+
+/** Contains a post and the author status. */
+export type UserPostEdge = {
+  __typename?: 'UserPostEdge';
+  /** Indicates weather the user is the author or co-author of the post. */
+  authorType: PostAuthorType;
+  /** The node holding the Post information. */
+  node: Post;
+};
+
+/** Filter for the posts of a user. */
+export enum UserPostsAuthorTypeFilter {
+  /** Only posts that are authored by the user. */
+  AuthorOnly = 'AUTHOR_ONLY',
+  /** Only posts that are co-authored by the user. */
+  CoAuthorOnly = 'CO_AUTHOR_ONLY'
+}
+
+/** Sorting for the posts of a user. */
+export enum UserPostsSort {
+  /** Oldest posts first. */
+  DatePublishedAsc = 'DATE_PUBLISHED_ASC',
+  /** Newest posts first. */
+  DatePublishedDesc = 'DATE_PUBLISHED_DESC'
+}
 
 /** The role of the user in the publication. */
 export enum UserPublicationRole {
@@ -2181,7 +3672,7 @@ export enum UserPublicationRole {
 
 /**
  * Connection to get list of publications.
- * Returns a list of edges which contains the publications and cursor to the last item of the previous page.
+ * Returns a list of edges which contains the documentation project and cursor to the last item of the previous page.
  */
 export type UserPublicationsConnection = Connection & {
   __typename?: 'UserPublicationsConnection';
@@ -2212,6 +3703,22 @@ export type UserPublicationsEdge = Edge & {
   role: UserPublicationRole;
 };
 
+export type UserRecommendedPublicationEdge = {
+  __typename?: 'UserRecommendedPublicationEdge';
+  /** The publication that is recommended by the publication this connection originates from. */
+  node: Publication;
+  /** The amount of followers the publication referenced in `node` has gained by recommendations from the publication. */
+  totalFollowersGained: Scalars['Int']['output'];
+};
+
+export type UserRecommendingPublicationEdge = {
+  __typename?: 'UserRecommendingPublicationEdge';
+  /** The publication that is recommending the publication this connection originates from. */
+  node: Publication;
+  /** The amount of followers the publication has gained by recommendations from the publication referenced in `node`. */
+  totalFollowersGained: Scalars['Int']['output'];
+};
+
 /**
  * Contains the flag indicating if the view count feature is enabled or not.
  * User can enable or disable the view count feature from the publication settings.
@@ -2221,6 +3728,18 @@ export type ViewCountFeature = Feature & {
   __typename?: 'ViewCountFeature';
   /** A flag indicating if the view count feature is enabled or not. */
   isEnabled: Scalars['Boolean']['output'];
+};
+
+export type Views = {
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
+
+export type Visitors = {
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
 };
 
 export type Webhook = Node & {
@@ -2249,7 +3768,10 @@ export type WebhookMessagesArgs = {
 export enum WebhookEvent {
   PostDeleted = 'POST_DELETED',
   PostPublished = 'POST_PUBLISHED',
-  PostUpdated = 'POST_UPDATED'
+  PostUpdated = 'POST_UPDATED',
+  StaticPageDeleted = 'STATIC_PAGE_DELETED',
+  StaticPageEdited = 'STATIC_PAGE_EDITED',
+  StaticPagePublished = 'STATIC_PAGE_PUBLISHED'
 }
 
 export type WebhookMessage = Node & {
@@ -2302,6 +3824,32 @@ export type WebhookMessageResponse = {
   httpStatus: Scalars['Int']['output'];
   /** The time it took from the moment the request has been send until the first byte of the response has been received. */
   timeToFirstByteMilliseconds?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Widget = Node & {
+  __typename?: 'Widget';
+  /** Content of the widget, can be a simple string or HTML */
+  content: Scalars['String']['output'];
+  /** The date and time the widget was created. */
+  createdAt: Scalars['DateTime']['output'];
+  /** The unique identifier of the widget */
+  id: Scalars['ID']['output'];
+  pinSettings?: Maybe<WidgetPinSettings>;
+  /** WidgetId, can be embedded as %%[widgetId] in the article */
+  widgetId: Scalars['String']['output'];
+};
+
+export enum WidgetPinLocation {
+  Bottom = 'BOTTOM',
+  Top = 'TOP'
+}
+
+export type WidgetPinSettings = {
+  __typename?: 'WidgetPinSettings';
+  /** Signifies if pinning of widget on all the articles of publication is enabled or not */
+  isPinned: Scalars['Boolean']['output'];
+  /** Describes the location of the widget on the article, can be TOP or BOTTOM */
+  location: WidgetPinLocation;
 };
 
 export type PageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage?: boolean | null };
