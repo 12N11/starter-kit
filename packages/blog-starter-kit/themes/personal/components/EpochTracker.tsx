@@ -26,10 +26,10 @@ const EpochTracker = () => {
   const progressPercentage = Math.round(Math.min(100, (currentDaySinceGenesis / totalDurationDays) * 100));
 
   return (
-    <div className="flex-col md:flex md:flex-row md:items-center justify-center text-neutral-600 dark:text-neutral-300 mx-auto p-4 gap-4">
-      <div className="flex flex-col text-left"><span>Alphanet&apos;s Big Bang</span></div>
+    <div className="flex-col md:flex md:flex-row md:items-center justify-center text-neutral-100 dark:text-neutral-200 mx-auto p-4 gap-4">
+      <div className="flex flex-col text-left"><span>Big Bang</span></div>
       <div className="">
-        <Progress value={progressPercentage} className="md:min-w-[500px] h-3.5" />
+        <Progress value={progressPercentage} className="md:min-w-[500px] min-w-[300px] md:h-3.5 h-2.5 m-2" />
       </div>
       <div className="flex flex-col text-right"><span className="text-right">Epoch 1211</span></div>
     </div>

@@ -86,7 +86,7 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 					/>
 				</Head>
 					<Container className="flex flex-col space-y-6 px-2 md:px-4 min-h-screen">
-					
+					<PersonalHeader />
 					<MainSpotlight />
 					
 					{/* {posts.length > 0 && <MinimalPosts context="home" posts={posts} />} */}
